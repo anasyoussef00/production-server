@@ -12,7 +12,7 @@ import (
 	"golang.org/x/exp/slices"
 )
 
-const MEMBER_DB_PATH = "C:\\Users\\Anas Youssef\\Documents\\projects\\new-ui\\db\\members.json"
+const MemberDbPath = "C:\\Users\\Anas Youssef\\Documents\\projects\\new-ui\\db\\members.json"
 
 type Member struct {
 	Id                  int              `json:"id"`
@@ -38,7 +38,7 @@ type Member struct {
 func MemberShowAll() ([]Member, error) {
 	var members []Member
 
-	content, err := os.ReadFile(MEMBER_DB_PATH)
+	content, err := os.ReadFile(MemberDbPath)
 	if err != nil {
 		// log.Fatal("ERROR WHEN OPENING FILE: ", err)
 		return members, errors.New(fmt.Sprintf("ERROR TRYING TO OPEN THE FILE: %v", err))
@@ -131,7 +131,7 @@ func MemberStore(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = os.WriteFile(MEMBER_DB_PATH, membersJson, fs.ModeAppend)
+	err = os.WriteFile(MemberDbPath, membersJson, fs.ModeAppend)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -186,7 +186,7 @@ func MemberUpdate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = os.WriteFile(MEMBER_DB_PATH, membersJson, fs.ModeAppend)
+	err = os.WriteFile(MemberDbPath, membersJson, fs.ModeAppend)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -230,7 +230,7 @@ func MemberDelete(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = os.WriteFile(MEMBER_DB_PATH, membersJson, fs.ModeAppend)
+	err = os.WriteFile(MemberDbPath, membersJson, fs.ModeAppend)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
