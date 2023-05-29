@@ -21,14 +21,14 @@ type Member struct {
 	LastName            string           `json:"lastName"`
 	BirthDate           string           `json:"birthDate"`
 	Gender              string           `json:"gender"`
-	Vip                 string           `json:"vip"`
+	Vip                 bool             `json:"vip"`
 	Country             string           `json:"country"`
 	Cin                 string           `json:"cin"`
 	DeliveryDate        string           `json:"deliveryDate"`
 	DeliveryLocation    string           `json:"deliveryLocation"`
 	CinValidUntil       string           `json:"cinValidUntil"`
 	Nationality         string           `json:"nationality"`
-	MoroccanNationality string           `json:"moroccanNationality"`
+	MoroccanNationality bool             `json:"moroccanNationality"`
 	FullFatherName      string           `json:"fullFatherName"`
 	FullMotherName      string           `json:"fullMotherName"`
 	Profession          Profession       `json:"profession"`
@@ -58,7 +58,7 @@ func GetMemberByID(id int) (Member, int, error) {
 		return Member{}, -1, err
 	}
 
-	idx := slices.IndexFunc(members, func(m Member) bool {
+	idx := slices.IndexFunc[Member](members, func(m Member) bool {
 		return m.Id == id
 	})
 
